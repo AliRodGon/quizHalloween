@@ -1,0 +1,108 @@
+/*-------------------- VARS --------------------*/
+:root {
+    --dark: rgb(24, 24, 24);
+    --light: rgb(235, 235, 235);
+    --red: #f94144;
+    --yellow: #f9c74f;
+    --green: #90be6d;
+    --blue: #609acc;
+}
+
+/*-------------------- GOOGLE FONTS --------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300;400;700;900&display=swap');
+
+/*-------------------- GENERAL STYLES --------------------*/
+body {
+    background-color: var(--light);
+    font-family: 'Noto Sans Mono', monospace;
+    overflow: hidden;
+}
+
+/*-------------------- QUESTIONS SECTION --------------------*/
+.question {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 3rem;
+    padding: 0 2rem;
+}
+
+.answer__container {
+    cursor: pointer;
+    margin-bottom: 0.8rem;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.15s;
+}
+
+.answer {
+    font-size: 0.8rem;
+}
+
+.answer__container--green {
+    background-color: var(--green);
+}
+
+.answer__container--red {
+    background-color: var(--red);
+}
+
+.answer__container--yellow {
+    background-color: var(--yellow);
+}
+
+.answer__container--blue {
+    background-color: var(--blue);
+}
+
+@media only screen and (min-width: 768px) {
+    .flex__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .question {
+        padding: 0 4rem;
+    }
+
+    .grid__container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        padding: 3rem 5rem;
+    }
+
+    .answer__container {
+        border-radius: 15px;
+        box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.34);
+        margin-bottom: 0;
+        padding: 2rem;
+        width: 12rem;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .grid__container {
+        padding: 3rem 15rem;
+    }
+
+    .question {
+        font-size: 2rem;
+        padding: 0 8rem;
+    }
+
+    .answer__container {
+        padding: 3rem;
+        width: 30rem;
+    }
+
+    .answer__container:hover {
+        transform: scale(1.04);
+    }
+
+    .answer {
+        font-size: 1.3rem;
+    }
+}
