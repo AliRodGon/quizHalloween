@@ -96,24 +96,6 @@ const printQA = finalObject => {
     document.querySelector('#question1').style.display = 'block';
 };
 
-// -------------- FUNCIÓN QUE IMPRIME EL RESULTADO FINAL --------------
-
-const printResults = () => {
-    const htmlFinal = `
-    <section class="final__results">
-        <h2 class="final__title">Final Score:</h2>
-        <p class="final__score">${score}</p>
-        <i
-            class="em em-tada"
-            aria-role="presentation"
-            aria-label="PARTY POPPER"
-        ></i>
-    </section>
-    <a href="./home.js" class="play__again">Play again</a>
-    `;
-    containerHTML.insertAdjacentHTML('beforeend', htmlFinal);
-};
-
 // -------------- FUNCIÓN QUE VALIDA LAS RESPUESTAS--------------
 const verifyAnswer = finalObject => {
     const answerContainer = document.querySelectorAll('.answer__container');
@@ -159,3 +141,24 @@ const verifyAnswer = finalObject => {
         });
     });
 };
+
+// -------------- FUNCIÓN QUE IMPRIME EL RESULTADO FINAL --------------
+
+const printResults = () => {
+    const htmlFinal = `
+    <section class="final__results">
+        <h2 class="final__title">Final Score:</h2>
+        <p class="final__score">${score}</p>
+        <i
+            class="em em-tada"
+            aria-role="presentation"
+            aria-label="PARTY POPPER"
+        ></i><br>
+        <input type="text" class="name__input" placeholder="Your name"><br>
+        <input type="button" value="Submit" class="name__submit">
+    </section>
+    `;
+    containerHTML.insertAdjacentHTML('beforeend', htmlFinal);
+};
+
+// -------------- FUNCIÓN QUE CREA UNA CUENTA REGRESIVA DE 10s --------------
