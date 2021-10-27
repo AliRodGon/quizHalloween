@@ -5,26 +5,26 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Preguntas</title>
+        <link href="https://emoji-css.afeld.me/emoji.css" rel="stylesheet" />
         <link rel="stylesheet" href="./css/normalize.css" />
         <link rel="stylesheet" href="./css/styles.css" />
     </head>
     <body>
-        <section class="flex__container">
-            <h2 class="question" id="question"></h2>
-            <section class="grid__container">
-                <div class="answer__container answer__container--green">
-                    <p class="answer" id="answer1"></p>
-                </div>
-                <div class="answer__container answer__container--red">
-                    <p class="answer" id="answer2"></p>
-                </div>
-                <div class="answer__container answer__container--yellow">
-                    <p class="answer" id="answer3"></p>
-                </div>
-                <div class="answer__container answer__container--blue">
-                    <p class="answer" id="answer4"></p>
-                </div>
-            </section>
+        <section class="header">
+            <div class="score time">
+                <p>Time: <span id="timeCount">10s</span></p>
+            </div>
+            <div class="score">
+                <p>Score: <span id="scoreCount">0</span></p>
+            </div>
+        </section>
+        <section class="flex__container"></section>
+        <section class="progress__bar">
+            <p class="progress__text">
+                Question <span id="progressCount">1</span> / 10
+            </p>
+
+            <div class="bar"></div>
         </section>
         <script src="./js/question.js"></script>
     </body>
