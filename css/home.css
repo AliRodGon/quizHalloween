@@ -1,0 +1,56 @@
+body {
+    background-color: white;   
+    height: 100vh; 
+}
+
+.main {
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+}
+/* @media only screen and (min-width: 925px) {
+    .main {
+        background-color: chartreuse;
+        flex-direction: row;
+        
+    }
+} */
+.bienvenido {   
+}
+
+.container__userdata { 
+    background-color: rgba(54, 162, 235, 0.2);
+    border:solid rgb(54, 162, 235, 1);
+    padding: 25px;
+    border-radius: 15px;
+    border-width: 3px;  
+}
+
+input {
+    border-radius: 5px;
+}
+
+.enviar {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.ct-chart ct-perfect-fourth{
+    /* aspect-ratio: inherit; */
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 80%;
+    margin-top: 15px;
+    border:solid rgb(54, 162, 235, 1);
+    padding: 25px;
+    border-radius: 15px;
+    border-width: 3px; 
+    margin: 5px,5px,5px,5px;
+}
+/* @media only screen and (min-width: 925px) {
+    .ct-chart ct-perfect-fourth {
+        height: 50%;
+        background-color: darkgray;
+    }
+} */
