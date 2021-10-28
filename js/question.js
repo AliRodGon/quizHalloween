@@ -105,34 +105,60 @@ const verifyAnswer = finalObject => {
             if (addId > 9) {
                 if (div.id === 'true') {
                     score += 1;
-                    alert('Correcto');
-                    containerHTML.innerHTML = null;
-                    printResults();
+                    swal({
+                        title: '¡Correcto!',
+                        text: 'Haz finalizado el quiz',
+                        icon: 'success',
+                        button: 'Finalizar',
+                    }).then(() => {
+                        containerHTML.innerHTML = null;
+                        printResults();
+                    });
                 } else {
-                    alert('Incorrecto');
-                    containerHTML.innerHTML = null;
-                    printResults();
+                    swal({
+                        title: '¡Incorrecto!',
+                        text: 'Haz finalizado el quiz',
+                        icon: 'error',
+                        button: 'Finalizar',
+                    }).then(value => {
+                        containerHTML.innerHTML = null;
+                        printResults();
+                    });
                 }
             } else {
                 if (div.id === 'true') {
                     score += 1;
                     addId += 1;
-                    alert('correcto');
-                    document.querySelector(`#question${addId}`).style.display =
-                        'block';
-                    document.querySelector(
-                        `#question${addId - 1}`
-                    ).style.display = 'none';
-                    console.log(addId);
+                    swal({
+                        title: '¡Correcto!',
+                        text: '¡Eres un máquina!',
+                        icon: 'success',
+                        button: 'Siguiente pregunta',
+                    }).then(() => {
+                        document.querySelector(
+                            `#question${addId}`
+                        ).style.display = 'block';
+                        document.querySelector(
+                            `#question${addId - 1}`
+                        ).style.display = 'none';
+                        console.log(addId);
+                    });
                 } else {
                     addId += 1;
-                    alert('incorrecto');
-                    document.querySelector(`#question${addId}`).style.display =
-                        'block';
-                    document.querySelector(
-                        `#question${addId - 1}`
-                    ).style.display = 'none';
-                    console.log(addId);
+                    swal({
+                        title: '¡Incorrecto!',
+                        text: 'Más suerte en la siguiente pregunta',
+                        icon: 'error',
+                        button: 'Siguiente pregunta',
+                    }).then(() => {
+                        document.querySelector(
+                            `#question${addId}`
+                        ).style.display = 'block';
+                        document.querySelector(
+                            `#question${addId - 1}`
+                        ).style.display = 'none';
+                        console.log(addId);
+                    });
                 }
             }
             console.log(`Puntuación: ${score}`);
@@ -160,5 +186,3 @@ const printResults = () => {
     `;
     containerHTML.insertAdjacentHTML('beforeend', htmlFinal);
 };
-
-// -------------- FUNCIÓN QUE CREA UNA CUENTA REGRESIVA DE 10s --------------
