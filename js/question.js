@@ -96,6 +96,78 @@ const printQA = finalObject => {
     document.querySelector('#question1').style.display = 'block';
 };
 
+// -------------- FUNCIÓN QUE VALIDA LAS RESPUESTAS--------------
+const verifyAnswer = finalObject => {
+    const answerContainer = document.querySelectorAll('.answer__container');
+    answerContainer.forEach(div => {
+        div.addEventListener('click', e => {
+            e.preventDefault();
+            if (addId > 9) {
+                if (div.id === 'true') {
+                    score += 1;
+                    swal({
+                        title: '¡Correcto!',
+                        text: 'Haz finalizado el quiz',
+                        icon: 'success',
+                        button: 'Finalizar',
+                    }).then(() => {
+                        containerHTML.innerHTML = null;
+                        printResults();
+                    });
+                } else {
+                    swal({
+                        title: '¡Incorrecto!',
+                        text: 'Haz finalizado el quiz',
+                        icon: 'error',
+                        button: 'Finalizar',
+                    }).then(value => {
+                        containerHTML.innerHTML = null;
+                        printResults();
+                    });
+                }
+            } else {
+                if (div.id === 'true') {
+                    score += 1;
+                    addId += 1;
+                    swal({
+                        title: '¡Correcto!',
+                        text: '¡Eres un máquina!',
+                        icon: 'success',
+                        button: 'Siguiente pregunta',
+                    }).then(() => {
+                        document.querySelector(
+                            `#question${addId}`
+                        ).style.display = 'block';
+                        document.querySelector(
+                            `#question${addId - 1}`
+                        ).style.display = 'none';
+                        console.log(addId);
+                    });
+                } else {
+                    addId += 1;
+                    swal({
+                        title: '¡Incorrecto!',
+                        text: 'Más suerte en la siguiente pregunta',
+                        icon: 'error',
+                        button: 'Siguiente pregunta',
+                    }).then(() => {
+                        document.querySelector(
+                            `#question${addId}`
+                        ).style.display = 'block';
+                        document.querySelector(
+                            `#question${addId - 1}`
+                        ).style.display = 'none';
+                        console.log(addId);
+                    });
+                }
+            }
+            console.log(`Puntuación: ${score}`);
+            document.querySelector('#progressCount').textContent = addId;
+            document.querySelector('#scoreCount').textContent = score;
+        });
+    });
+};
+
 // -------------- FUNCIÓN QUE IMPRIME EL RESULTADO FINAL --------------
 
 const printResults = () => {
@@ -107,55 +179,10 @@ const printResults = () => {
             class="em em-tada"
             aria-role="presentation"
             aria-label="PARTY POPPER"
-        ></i>
+        ></i><br>
+        <input type="text" class="name__input" placeholder="Your name"><br>
+        <input type="button" value="Submit" class="name__submit">
     </section>
-    <a href="./home.js" class="play__again">Play again</a>
     `;
     containerHTML.insertAdjacentHTML('beforeend', htmlFinal);
-};
-
-// -------------- FUNCIÓN QUE VALIDA LAS RESPUESTAS--------------
-const verifyAnswer = finalObject => {
-    const answerContainer = document.querySelectorAll('.answer__container');
-    answerContainer.forEach(div => {
-        div.addEventListener('click', e => {
-            e.preventDefault();
-            if (addId > 9) {
-                if (div.id === 'true') {
-                    score += 1;
-                    alert('Correcto');
-                    containerHTML.innerHTML = null;
-                    printResults();
-                } else {
-                    alert('Incorrecto');
-                    containerHTML.innerHTML = null;
-                    printResults();
-                }
-            } else {
-                if (div.id === 'true') {
-                    score += 1;
-                    addId += 1;
-                    alert('correcto');
-                    document.querySelector(`#question${addId}`).style.display =
-                        'block';
-                    document.querySelector(
-                        `#question${addId - 1}`
-                    ).style.display = 'none';
-                    console.log(addId);
-                } else {
-                    addId += 1;
-                    alert('incorrecto');
-                    document.querySelector(`#question${addId}`).style.display =
-                        'block';
-                    document.querySelector(
-                        `#question${addId - 1}`
-                    ).style.display = 'none';
-                    console.log(addId);
-                }
-            }
-            console.log(`Puntuación: ${score}`);
-            document.querySelector('#progressCount').textContent = addId;
-            document.querySelector('#scoreCount').textContent = score;
-        });
-    });
 };

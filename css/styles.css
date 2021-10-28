@@ -2,10 +2,11 @@
 :root {
     --dark: rgb(24, 24, 24);
     --light: rgb(235, 235, 235);
-    --red: #f94144;
-    --yellow: #f9c74f;
-    --green: #90be6d;
-    --blue: #609acc;
+    --red: linear-gradient(to top left, #e52a5a, #ff585f);
+    --yellow: linear-gradient(to top left, #ffb003, #ffcb03);
+    --green: linear-gradient(to top left, #39b385, #9be15d);
+    --blue: linear-gradient(to top left, #6092cf, #80b7e7);
+    --shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.34);
 }
 
 /*-------------------- GOOGLE FONTS --------------------*/
@@ -43,6 +44,7 @@ body {
     padding: 1rem;
     text-align: center;
     transition: all 0.15s;
+    z-index: 100;
 }
 
 .answer {
@@ -50,19 +52,19 @@ body {
 }
 
 .answer__container--green {
-    background-color: var(--green);
+    background-image: var(--green);
 }
 
 .answer__container--red {
-    background-color: var(--red);
+    background-image: var(--red);
 }
 
 .answer__container--yellow {
-    background-color: var(--yellow);
+    background-image: var(--yellow);
 }
 
 .answer__container--blue {
-    background-color: var(--blue);
+    background: var(--blue);
 }
 
 .progress__bar {
@@ -113,7 +115,7 @@ body {
 
     .answer__container {
         border-radius: 15px;
-        box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.34);
+        box-shadow: var(--shadow);
         margin-bottom: 0;
         padding: 2rem;
         width: 12rem;
@@ -149,8 +151,8 @@ body {
     }
 
     .answer__container {
-        padding: 3rem;
-        width: 30rem;
+        padding: 2.5rem;
+        width: 28rem;
     }
 
     .answer__container:hover {
@@ -164,13 +166,13 @@ body {
 
 /*-------------------- RESULTS SECTION --------------------*/
 .final__results {
-    background-color: var(--blue);
-    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.25);
+    background: var(--blue);
+    box-shadow: var(--shadow);
     border-radius: 15px;
     padding: 2rem 5rem;
     margin: 4rem auto 0;
     text-align: center;
-    width: 7rem;
+    width: 12rem;
 }
 
 .final__title {
@@ -187,27 +189,36 @@ body {
     font-size: 2rem;
 }
 
-.play__again {
-    color: white;
-    background-color: var(--green);
-    border-radius: 15px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-decoration: none;
-    margin-top: 2rem;
-    padding: 2rem 3rem;
-    transition: all 0.15s;
+.name__input {
+    background-color: var(--light);
+    border: none;
+    border-radius: 50px;
+    margin: 3rem 0 2rem;
+    padding: 0.8rem 0;
+    text-align: center;
+    transition: all 0.3s;
 }
 
-.play__again:hover {
-    color: var(--dark);
-    background-color: var(--yellow);
+.name__input:focus {
+    outline: none;
+    background-color: white;
+}
+
+::placeholder {
+    text-align: center;
+}
+
+.name__submit {
+    background-color: var(--light);
+    border: none;
+    border-radius: 15px;
+    padding: 1.2rem 4rem;
 }
 
 @media only screen and (min-width: 768px) {
     .final__results {
         width: 30rem;
-        padding: 5rem;
+        padding: 2rem 5rem;
         margin: 0;
     }
 
@@ -222,6 +233,40 @@ body {
 
     .em-tada {
         font-size: 3rem;
+    }
+
+    .name__input {
+        padding: 1.8rem 3rem;
+    }
+
+    ::placeholder {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .name__submit {
+        cursor: pointer;
+        font-size: 1.4rem;
+        padding: 1.8rem 5rem;
+        transition: all 0.2s;
+    }
+
+    .name__submit:hover {
+        background-image: var(--green);
+    }
+}
+@media only screen and (min-width: 992px) {
+    .name__input {
+        padding: 1rem 2rem;
+    }
+
+    ::placeholder {
+        font-size: 1rem;
+    }
+
+    .name__submit {
+        font-size: 1rem;
+        padding: 1rem 5rem;
     }
 }
 
