@@ -1,9 +1,33 @@
-// PROYECTO QUIZZ DE HALLOWEEN UTILIZANDO LA API DE OPENTDB
+// PROYECTO QUIZZ UTILIZANDO LA API DE OPENTDB Y FIRESTORE
 
 // -------------- VARIABLES --------------
 let score = 0;
 let addId = 1;
 const containerHTML = document.querySelector('.flex__container');
+
+// -------------- INICIALIZAR FIREBASE Y FIRESTORE--------------
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js';
+import {
+    getFirestore,
+    addDoc,
+    collection,
+    getDoc,
+    getDocs,
+    query,
+    where,
+} from 'https://www.gstatic.com/firebasejs/9.1.2/firebase-firestore.js';
+
+const firebaseConfig = {
+    apiKey: 'AIzaSyBZx0Cu8tns0mr1lXagWCz1OgRU9nTaxAk',
+    authDomain: 'quiz-alicia-ricardo.firebaseapp.com',
+    projectId: 'quiz-alicia-ricardo',
+    storageBucket: 'quiz-alicia-ricardo.appspot.com',
+    messagingSenderId: '1020175504483',
+    appId: '1:1020175504483:web:342d72c8b2ed6df4205456',
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 // -------------- FUNCIÓN ASÍNCRONA PARA OBTENER DATOS DE LA API --------------
 const getQuestions = async () => {
@@ -97,7 +121,7 @@ const printQA = finalObject => {
 };
 
 // -------------- FUNCIÓN QUE VALIDA LAS RESPUESTAS--------------
-const verifyAnswer = finalObject => {
+const verifyAnswer = () => {
     const answerContainer = document.querySelectorAll('.answer__container');
     answerContainer.forEach(div => {
         div.addEventListener('click', e => {
@@ -106,20 +130,20 @@ const verifyAnswer = finalObject => {
                 if (div.id === 'true') {
                     score += 1;
                     swal({
-                        title: '¡Correcto!',
-                        text: 'Haz finalizado el quiz',
+                        title: 'Right answer!',
+                        text: 'You have finished the quiz',
                         icon: 'success',
-                        button: 'Finalizar',
+                        button: 'Finish quiz',
                     }).then(() => {
                         containerHTML.innerHTML = null;
                         printResults();
                     });
                 } else {
                     swal({
-                        title: '¡Incorrecto!',
-                        text: 'Haz finalizado el quiz',
+                        title: 'Wrong answer!',
+                        text: 'You have finished the quiz',
                         icon: 'error',
-                        button: 'Finalizar',
+                        button: 'Finish quiz',
                     }).then(value => {
                         containerHTML.innerHTML = null;
                         printResults();
@@ -130,10 +154,10 @@ const verifyAnswer = finalObject => {
                     score += 1;
                     addId += 1;
                     swal({
-                        title: '¡Correcto!',
-                        text: '¡Eres un máquina!',
+                        title: 'Right answer!',
+                        text: 'You are awesome!',
                         icon: 'success',
-                        button: 'Siguiente pregunta',
+                        button: 'Next question',
                     }).then(() => {
                         document.querySelector(
                             `#question${addId}`
@@ -141,15 +165,14 @@ const verifyAnswer = finalObject => {
                         document.querySelector(
                             `#question${addId - 1}`
                         ).style.display = 'none';
-                        console.log(addId);
                     });
                 } else {
                     addId += 1;
                     swal({
-                        title: '¡Incorrecto!',
-                        text: 'Más suerte en la siguiente pregunta',
+                        title: 'Wrong answer!',
+                        text: 'Better luck on the next question',
                         icon: 'error',
-                        button: 'Siguiente pregunta',
+                        button: 'Next question',
                     }).then(() => {
                         document.querySelector(
                             `#question${addId}`
@@ -157,11 +180,9 @@ const verifyAnswer = finalObject => {
                         document.querySelector(
                             `#question${addId - 1}`
                         ).style.display = 'none';
-                        console.log(addId);
                     });
                 }
             }
-            console.log(`Puntuación: ${score}`);
             document.querySelector('#progressCount').textContent = addId;
             document.querySelector('#scoreCount').textContent = score;
         });
@@ -185,4 +206,23 @@ const printResults = () => {
     </section>
     `;
     containerHTML.insertAdjacentHTML('beforeend', htmlFinal);
+    saveScore();
+};
+
+// -------------- FUNCIÓN PARA GUARDAR DATOS EN FIRESTORE --------------
+const saveScore = () => {
+    const playerName = document.querySelector('.name__input');
+    const submitBtn = document.querySelector('.name__submit');
+    submitBtn.addEventListener('click', () => {
+        if (playerName.value) {
+            addDoc(collection(db, 'players'), {
+                name: playerName.value,
+                score: score,
+            }).then(() => {
+                location.href = './home.js';
+            });
+        } else {
+            swal('You must introduce your name');
+        }
+    });
 };
