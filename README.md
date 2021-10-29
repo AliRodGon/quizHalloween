@@ -1,2 +1,0 @@
-# quizHalloween
-ejercicio entregable clase
