@@ -219,7 +219,7 @@ const saveScore = () => {
                 name: playerName.value,
                 score: score,
             }).then(() => {
-                location.href = './home.js';
+                location.href = '../index.html';
             });
         } else {
             swal('You must introduce your name');
